@@ -86,14 +86,13 @@ new_studio = Studio.new
 new_studio["name"] = "Warner Bros"
 new_studio.save
 
-
-
 new_movie = Movie.new
 new_movie["title"] = "Batman Begins"
 new_movie["year_released"] = 2005
 new_movie["rated"] = "PG-13"
 new_movie["studio_id"] = Studio.find_by({"name" => "Warner Bros"})["id"]
 new_movie.save
+
 
 new_movie = Movie.new
 new_movie["title"] = "The Dark Knight"
@@ -108,6 +107,80 @@ new_movie["year_released"] = 2012
 new_movie["rated"] = "PG-13"
 new_movie["studio_id"] = Studio.find_by({"name" => "Warner Bros"})["id"]
 new_movie.save
+
+new_actor = Actor.new
+new_actor["name"] = "Christian Bale"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Michael Caine"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Liam Neeson"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Katie Holmes"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Gary Oldman"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Heath Ledger"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Aaron Eckhart"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Maggie Gyllenhaal"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Tom Hardy"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Joseph Gordon-Levitt"
+new_actor.save
+
+new_actor = Actor.new
+new_actor["name"] = "Anne Hathaway"
+new_actor.save
+
+data = [  ["Batman Begins", "Christian Bale", "Bruce Wayne"],
+  ["Batman Begins", "Michael Caine", "Alfred"],
+  ["Batman Begins", "Liam Neeson", "Ra's Al Ghul"],
+  ["Batman Begins", "Katie Holmes", "Rachel Dawes"],
+  ["Batman Begins", "Gary Oldman", "Commissioner Gordon"],
+  ["The Dark Knight", "Christian Bale", "Bruce Wayne"],
+  ["The Dark Knight", "Heath Ledger", "Joker"],
+  ["The Dark Knight", "Aaron Eckhart", "Harvey Dent"],
+  ["The Dark Knight", "Michael Caine", "Alfred"],
+  ["The Dark Knight", "Maggie Gyllenhaal", "Rachel Dawes"],
+  ["The Dark Knight Rises", "Christian Bale", "Bruce Wayne"],
+  ["The Dark Knight Rises", "Gary Oldman", "Commissioner Gordon"],
+  ["The Dark Knight Rises", "Tom Hardy", "Bane"],
+  ["The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake"],
+  ["The Dark Knight Rises", "Anne Hathaway", "Selina Kyle"]
+]
+
+data.each do |movie_title, actor_name, character_name|
+  new_role = Role.new
+  new_role["movie_id"] = Movie.find_by({"title"=> movie_title})["id"]
+  new_role["actor_id"] = Actor.find_by({"name"=> actor_name})["id"]
+  new_role["character_name"] = character_name
+  new_role.save
+end
+
+
+
+
+
 
 
 # Prints a header for the movies output
@@ -130,3 +203,7 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+for role in Role.all
+    puts "#{Movie.find_by("id"=>role.movie_id)["title"]} #{Actor.find_by("id"=>role.actor_id)["name"]} #{role.character_name}"
+end
