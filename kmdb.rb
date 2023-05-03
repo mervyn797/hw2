@@ -93,7 +93,6 @@ new_movie["rated"] = "PG-13"
 new_movie["studio_id"] = Studio.find_by({"name" => "Warner Bros"})["id"]
 new_movie.save
 
-
 new_movie = Movie.new
 new_movie["title"] = "The Dark Knight"
 new_movie["year_released"] = 2008
@@ -176,11 +175,6 @@ data.each do |movie_title, actor_name, character_name|
   new_role["character_name"] = character_name
   new_role.save
 end
-
-
-
-
-
 
 
 # Prints a header for the movies output
